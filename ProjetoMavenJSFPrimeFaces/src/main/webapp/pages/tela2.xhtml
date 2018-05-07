@@ -9,13 +9,45 @@
 	>
 	
 	<ui:define name="title">
-		<h:outputText value="#{msg['pages.tela2.title']}" />
+		<h:outputText value="#{msg['pages.cadastroProfessor.title']}" />
 	</ui:define>
 	
 
 	<ui:define name="principal">
 	 	 
-	   	<p:outputLabel value="#{msg['pages.tela2.hello']}"/>
+	   	 <h1><p:outputLabel value="#{msg['pages.tela2.menu']}"/></h1>
+	  
+	  <h:form id="formProfessor">	
+	  <p:panelGrid columns="2">
+      <p:outputLabel value="#{msg['pages.cadastroProfessor.codigo']}" />
+      <p:inputText value="#{professorManagedBean.professor.codigo}"/>
+	  <p:outputLabel value="#{msg['pages.cadastroProfessor.nome']}" />
+      <p:inputText value="#{professorManagedBean.professor.nome}"/>
+      <p:outputLabel value="#{msg['pages.cadastroProfessor.formacao']}" />
+      <p:inputText value="#{professorManagedBean.professor.formacao}"/>
+	  </p:panelGrid>
+	  <p:commandButton value="#{msg['pages.cadastroProfessor.btnSalvar']}" 
+	                 action="#{professorManagedBean.salvar}"
+	                 update=":formProfessor, :tabelaProfessor"
+	                 />
+       </h:form>
+	
+   <p:dataTable value="#{professorManagedBean.professores}"
+                var="aux"
+                id="tabelaProfessor"
+   >
+      <p:column headerText="#{msg['pages.cadastroProfessor.codigo']}">
+        <p:outputLabel value="#{aux.codigo}" />
+      </p:column>
+      <p:column headerText="#{msg['pages.cadastroProfessor.nome']}">
+        <p:outputLabel value="#{aux.nome}" />
+      </p:column>
+      <p:column headerText="#{msg['pages.cadastroProfessor.formacao']}">
+        <p:outputLabel value="#{aux.formacao}" />
+      </p:column>
+      
+   </p:dataTable>	
+	   
 	   
 	</ui:define>
 </ui:composition>
